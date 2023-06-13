@@ -89,7 +89,7 @@
   getLikeButton();
 
 
-
+  
 
 
 
@@ -97,7 +97,7 @@
     
     const commentsHtml = comments.map((comment, index) => {
 
-    return `<li class="comment">
+    return `<li class="comment" data-comments="${comment.name}">
           <div class="comment-header">
             <div>${comment.name}</div>
             <div>${comment.dateСreation}</div>
@@ -123,7 +123,14 @@
 
   renderComments();
 
+  const commentsButtonsElements = document.querySelectorAll(".comment");
 
+  for (const comment of commentsButtonsElements) {
+    comment.addEventListener('click', () => {
+      const dataComment = comment.dataset.textComment;
+      alert('1');
+    })
+  };
 
 
 
@@ -166,9 +173,9 @@
 
 
     comments.push({
-      name: inputNameElement.value,
+      name: inputNameElement.value.replaceAll('<', '').replaceAll('>', ''),
       dateСreation: currentDate,
-      textComment: inputTextElement.value,
+      textComment: inputTextElement.value.replaceAll('<', '').replaceAll('>', ''),
       likeComment: false,
       likesNumber: 0,
     });
